@@ -109,20 +109,21 @@ button:hover {
 <button onclick="showMessage()">Press Me 💌</button>
 
 <!-- صندوق الرسالة -->
-<div id="messageBox">
+<div id="messageBox" onclick="playKiss()">
 hi baby, i just wanted to remind you that meeting you has been one of the best things
 that ever happened to me. thank you for everything you've done for me. thank you for always being there for me and making me feel that i'm not alone in everything. i am out of words to tell how grateful i am to have you. you make my life better just by being in it, and i never want to lose you. i can't promise you that i will stay with you forever but i'll try my best to stay. i love you so much.
 <br><br>
 <button onclick="closeMessage()">Close</button>
 </div>
 
+<!-- صوت البوسة -->
+<audio id="kissSound" src="Kiss Sound Effect(MP3_160K).mp3"></audio>
+
 <script>
-// عرض الصندوق
 function showMessage() {
   document.getElementById("messageBox").style.display = "block";
 }
 
-// غلق الصندوق
 function closeMessage() {
   document.getElementById("messageBox").style.display = "none";
 }
@@ -139,6 +140,13 @@ setInterval(() => {
     setTimeout(() => { heart.remove(); }, 5000);
   }
 }, 300);
+
+// تشغيل صوت البوسة لما تدوسي على الصندوق
+function playKiss() {
+  const audio = document.getElementById("kissSound");
+  audio.currentTime = 0;
+  audio.play();
+}
 </script>
 
 </body>
