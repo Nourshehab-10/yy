@@ -3,37 +3,38 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>I Love You Koky</title>
+
 <style>
 body {
   margin: 0;
   height: 100vh;
-  background: linear-gradient(to right, #ffb6c1, #ff69b4);
+  overflow: hidden;
+  background: linear-gradient(135deg, #ff9ecb, #ff4fa3);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
-/* العنوان */
+/* عنوان */
 h1 {
   color: white;
-  font-size: 50px;
-  text-align: center;
+  font-size: 48px;
+  text-shadow: 0 0 20px rgba(255,255,255,0.6);
   margin-bottom: 30px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* الزرار */
+/* زرار */
 button {
-  padding: 15px 30px;
+  padding: 15px 35px;
   font-size: 22px;
   border: none;
-  border-radius: 12px;
-  background-color: white;
-  color: #ff69b4;
+  border-radius: 30px;
+  background: white;
+  color: #ff4fa3;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 0 20px rgba(255,255,255,0.8);
   transition: 0.3s;
 }
 
@@ -41,82 +42,106 @@ button:hover {
   transform: scale(1.1);
 }
 
-/* صندوق الرسالة المنبثق */
+/* قلوب الباكجراوند */
+.heart-bg {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(255,255,255,0.8);
+  transform: rotate(-45deg);
+  animation: float 8s linear infinite;
+}
+
+.heart-bg:before,
+.heart-bg:after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+}
+
+.heart-bg:before { top: -10px; left: 0; }
+.heart-bg:after { left: 10px; top: 0; }
+
+@keyframes float {
+  0% { transform: translateY(100vh) rotate(-45deg); opacity: 1; }
+  100% { transform: translateY(-10vh) rotate(-45deg); opacity: 0; }
+}
+
+/* البوكس */
 #messageBox {
   display: none;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: linear-gradient(to right, #ffb6c1, #ff69b4);
-  color: white;
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-  max-width: 90%;
-  max-height: 80%;
+  background: rgba(255, 182, 193, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 25px;
+  width: 85%;
+  max-height: 75%;
   overflow-y: auto;
   text-align: center;
+  color: white;
   font-size: 18px;
-  z-index: 1000;
-  position: relative;
+  box-shadow: 0 0 40px rgba(255,255,255,0.7);
 }
 
-/* زرار داخل الصندوق */
-#messageBox button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  background-color: white;
-  color: #ff69b4;
-  cursor: pointer;
-}
-
-/* القلوب داخل الصندوق */
-#messageBox .heart {
+/* قلوب داخل البوكس */
+.heart-box {
   position: absolute;
-  width: 15px;
-  height: 15px;
-  background-color: red;
+  width: 12px;
+  height: 12px;
+  background: red;
   transform: rotate(-45deg);
   animation: floatBox 5s linear infinite;
 }
 
-#messageBox .heart:before,
-#messageBox .heart:after {
+.heart-box:before,
+.heart-box:after {
   content: "";
   position: absolute;
-  width: 15px;
-  height: 15px;
-  background-color: red;
+  width: 12px;
+  height: 12px;
+  background: red;
   border-radius: 50%;
 }
 
-#messageBox .heart:before { top: -7.5px; left: 0; }
-#messageBox .heart:after { left: 7.5px; top: 0; }
+.heart-box:before { top: -6px; left: 0; }
+.heart-box:after { left: 6px; top: 0; }
 
 @keyframes floatBox {
   0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
-  100% { transform: translateY(-150px) rotate(-45deg); opacity: 0; }
+  100% { transform: translateY(-120px) rotate(-45deg); opacity: 0; }
+}
+
+.closeBtn {
+  margin-top: 15px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: none;
+  background: white;
+  color: #ff4fa3;
+  cursor: pointer;
 }
 </style>
 </head>
+
 <body>
 
 <h1>I love you Koky ❤️</h1>
-<button onclick="showMessage()">Press Me 💌</button>
+<button onclick="showMessage()">Open My Heart 💌</button>
 
-<!-- صندوق الرسالة -->
 <div id="messageBox" onclick="playKiss()">
 hi baby, i just wanted to remind you that meeting you has been one of the best things
 that ever happened to me. thank you for everything you've done for me. thank you for always being there for me and making me feel that i'm not alone in everything. i am out of words to tell how grateful i am to have you. you make my life better just by being in it, and i never want to lose you. i can't promise you that i will stay with you forever but i'll try my best to stay. i love you so much.
 <br><br>
-<button onclick="closeMessage()">Close</button>
+<button class="closeBtn" onclick="closeMessage()">Close 💗</button>
 </div>
 
-<!-- صوت البوسة -->
 <audio id="kissSound" src="kiss.mp3"></audio>
 
 <script>
@@ -128,25 +153,33 @@ function closeMessage() {
   document.getElementById("messageBox").style.display = "none";
 }
 
-// توليد القلوب داخل الصندوق
+function playKiss() {
+  const audio = document.getElementById("kissSound");
+  audio.currentTime = 0;
+  audio.play().catch(() => {});
+}
+
+/* قلوب الباكجراوند */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart-bg";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (5 + Math.random()*5) + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => { heart.remove(); }, 8000);
+}, 500);
+
+/* قلوب جوه البوكس */
 setInterval(() => {
   const box = document.getElementById("messageBox");
   if(box.style.display === "block") {
     const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.style.left = Math.random() * 90 + "%";
-    heart.style.width = heart.style.height = (10 + Math.random()*10) + "px";
+    heart.className = "heart-box";
+    heart.style.left = Math.random() * 80 + "%";
     box.appendChild(heart);
     setTimeout(() => { heart.remove(); }, 5000);
   }
-}, 300);
-
-// تشغيل صوت البوسة لما تدوسي على الصندوق
-function playKiss() {
-  const audio = document.getElementById("kissSound");
-  audio.currentTime = 0;
-  audio.play();
-}
+}, 400);
 </script>
 
 </body>
